@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#ffffff">
+  <title>Busca CEP</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel="manifest" href="/manifest.json">
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
+</head>
+
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Busca CEP</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a href="#buscar-cep">Buscar CEP</a></li>
+          <li class="tab col s3"><a class="active" href="#buscar-rua">Buscar Rua</a></li>
+        </ul>
+      </br>
+      </div>
+      <div id="buscar-cep" class="col s12 m6">
+
+        <div class="input-field col s12">
+          <input onmouseout="buscaCep(this)" placeholder="Ex: 51011060" id="first_name" type="text" class="validate">
+          <label for="first_name">Cep</label>
+        </div>
+
+      </div>
+      <div id="buscar-rua" class="col s12 m6">
+
+
+        <div class="input-field col s12">
+          <input onmouseout="buscaRua(this)" placeholder="Ex: Barão" id="rua" type="text" class="validate">
+          <label for="rua">Rua</label>
+        </div>
+        <div class="input-field col s12">
+          
+          <div class="input-field col s12 m6">
+            <select onchange="pegarCidades(this)" id="estados" class="browser-default">
+            </select>
+            <label for="estados" class="active">Selecione um Estado</label>
+          </div>
+          
+          <div class="input-field col s12 m6">
+            <select id="cidades" class="browser-default">
+            </select>
+            <label for="cidades" class="active">Selecione uma Cidade</label>
+          </div>
+        </div>
+
+
+      </div>
+      <div id="status"></div>
+      <div id="target"></div>
+      <div id="contador" class="center"></div>
+      <div class="col s12 m6" id="content"></div>
+    </div>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/script.js"></script>
+
+  <script>
+
+    if(navigator.onLine){
+    $('#rua').prop('disabled', false);
+    }else{
+    $('#rua').prop('disabled', true);
+    }
+
+function handleStateChange() {
+  var timeBadge = new Date().toTimeString().split(' ')[0];
+  var newState = document.createElement('p');
+  var state = navigator.onLine ? 'online' : 'offline';
+  if(state == 'online'){
+    $('#rua').prop('disabled', false);
+    }else{
+    $('#rua').prop('disabled', true);
+    }
+  document.getElementById('status').innerHTML = state
+}
+
+window.addEventListener('online', handleStateChange);
+window.addEventListener('offline', handleStateChange)
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "Busca CEP",
+  "short_name": "BUSCA-CEP",
+  "icons": [
+    {
+      "src": "cep.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "cep.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "display": "standalone"
+}
